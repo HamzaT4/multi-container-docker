@@ -1,0 +1,15 @@
+sudo: required 
+services:
+  - docker
+
+before_install:
+  - docker build -t hamzat4/react-test -f ./client/Dockerfile.Dev ./client
+
+scirpt:
+  - docker run -e CI=true hamzat4/react-test npm test
+
+after_success: 
+  - docker build -t hamzat4/multi-client ./client
+  - docker build -t hamzat4/multi-nginx ./nginx
+  - docker build -t hamzat4/multi-server ./server
+  - docker build -t hamzat4/multi-worker ./worker
