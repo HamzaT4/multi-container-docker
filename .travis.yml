@@ -13,3 +13,9 @@ after_success:
   - docker build -t hamzat4/multi-nginx ./nginx
   - docker build -t hamzat4/multi-server ./server
   - docker build -t hamzat4/multi-worker ./worker
+  - echo "$DOCKER_PASSOWRD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push hamzat4/multi-client
+  - docker pushh amzat4/multi-nginx
+  - docker push hamzat4/multi-server
+  - docker push hamzat4/multi-worker
+
